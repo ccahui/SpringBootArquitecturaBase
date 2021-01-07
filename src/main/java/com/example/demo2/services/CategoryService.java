@@ -62,7 +62,7 @@ public class CategoryService {
 	}
 
 	public CategoryDto read(Long id){
-		Category category = repoCategory.findById(id).orElseThrow(()-> new NotFoundException("Post id ("+ id +")"));
+		Category category = repoCategory.findById(id).orElseThrow(()-> new NotFoundException("Category id ("+ id +")"));
 		CategoryDto dto = categoryToCategoryDto(category);
 		return dto;
 	}

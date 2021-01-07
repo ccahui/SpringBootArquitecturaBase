@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(CategoryResource.CATEGORIES)
 public class CategoryResource {
@@ -37,7 +39,7 @@ public class CategoryResource {
 	}
 	
 	@PostMapping
-	public CategoryDto create(@RequestBody CategoryCreationDto body){
+	public CategoryDto create(@Valid @RequestBody CategoryCreationDto body){
 		return service.create(body);
 	}
 	

@@ -1,9 +1,10 @@
 package com.example.demo2.dto;
 
+import javax.validation.constraints.NotEmpty;
 
 public class CategoryCreationDto {
 
-	
+	@NotEmpty
 	private String categoryName;
 	
 	public CategoryCreationDto() {}
