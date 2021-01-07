@@ -31,6 +31,7 @@ public class RepositoryPostIT {
 
 
 	@Test
+	@Transactional
 	void testPostWithComments() {
 	    	
 			Long id = createPost();

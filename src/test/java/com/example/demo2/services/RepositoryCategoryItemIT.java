@@ -1,4 +1,4 @@
-package com.example.demo2.repositories;
+package com.example.demo2.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,11 @@ import com.example.demo2.models.IdCategoryItem;
 import com.example.demo2.models.Item;
 import com.example.demo2.models.ItemM;
 import com.example.demo2.models.Post;
+import com.example.demo2.repositories.RepositoryCategory;
+import com.example.demo2.repositories.RepositoryCategoryItem;
 import com.example.demo2.repositories.RepositoryComment;
 import com.example.demo2.repositories.RepositoryCourseIT;
+import com.example.demo2.repositories.RepositoryItemM;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,7 +52,7 @@ public class RepositoryCategoryItemIT {
 		repoItem.save(item);
 		
 		CategoryItem categoryItem = new CategoryItem(category, item);
-		repoCategoryItem.save	(categoryItem);
+		repoCategoryItem.save(categoryItem);
 
 		assertEquals(1, item.getCategoryItems().size());
 		assertEquals(1, category.getCategoryItems().size());
