@@ -28,7 +28,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @TestConfig
-public class TestModelMapper {
+public class CategoryModelMapper {
 
 	@Autowired
 	private RepositoryCategory repoCategory;
@@ -59,8 +59,19 @@ public class TestModelMapper {
 		
 	}
 	
-	public void createCategory() {
+	@Test
+	@Transactional
+	public void categoryCreationDtoToCategory() {
+		
+		CategoryCreationDto categoryCreationDto = new CategoryCreationDto("Nuevo");
+		
+		Category category = modelMapper.map(categoryCreationDto, Category.class);
+		
+		assertEquals(categoryCreationDto.getCategoryName(), category.getName());
+		
 		
 	}
+	
+	
 
 }

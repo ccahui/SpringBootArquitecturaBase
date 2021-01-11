@@ -52,7 +52,7 @@ public class ResourceCategoryIT {
 	}
 	
 	@Test
-	void testSave() {
+	void testSaveSuccess() {
 		CategoryCreationDto categoryDto = new CategoryCreationDto("Category");
 		
 		CategoryDto response = this.webTestClient.post().uri(CategoryResource.CATEGORIES)
@@ -64,9 +64,18 @@ public class ResourceCategoryIT {
 		
 		assertEquals(response.getCategoryName(), categoryDto.getCategoryName());
 	}
+	@Test
+	void testSaveBadRequestNameNotBlank() {
+		CategoryCreationDto categoryDto = new CategoryCreationDto("");
+		
+		this.webTestClient.post().uri(CategoryResource.CATEGORIES)
+				.body(BodyInserters.fromValue(categoryDto))
+				.exchange()
+				.expectStatus().isBadRequest();
+	}
 	
 	@Test
-	void testUpdatePostPresent() {
+	void testUpdateCategoryPresent() {
 	
 		Long id = createCategory("CategoryUpdate");
 		
