@@ -15,7 +15,7 @@ import com.example.demo2.repositories.RepositoryComment2;
 import com.example.demo2.repositories.RepositoryPost;
 import com.example.demo2.repositories.RepositoryPost2;
 import com.example.demo2.rest_controller.exception.NotFoundException;
-import com.example.demo2.services.CategoryService;
+import com.example.demo2.services.ServiceCategoria;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ import javax.validation.Valid;
 public class CategoryResource {
 
 	@Autowired
-	private CategoryService service;
+	private ServiceCategoria service;
     
 	public static final String CATEGORIES = "/categories";
 	public static final String ID = "/{id}";

@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 
 import com.example.demo2.ApiTestConfig;
+import com.example.demo2.DataBaseCleanup;
 import com.example.demo2.dto.CategoryCreationDto;
 import com.example.demo2.dto.CategoryDto;
 import com.example.demo2.models.Category;
@@ -29,9 +30,10 @@ public class ResourceCategoryIT {
 	
 	@Autowired
 	private RepositoryCategory repoCategory;
-	
 	@Autowired
 	private WebTestClient webTestClient;
+	@Autowired
+	private DataBaseCleanup dbclean;
 	
 	@BeforeEach
 	void seedDb() {
@@ -131,7 +133,7 @@ public class ResourceCategoryIT {
 	}
 	
 	@Test
-	void testCategoryNotPresent() {
+	void testDeleteCategoryNotPresent() {
 		int id = 555;
 		this.webTestClient.delete().uri(PostResource.POSTS+PostResource.ID, id)
 				.exchange()
@@ -146,7 +148,7 @@ public class ResourceCategoryIT {
 
 	@AfterEach
 	void drowp() {
-		repoCategory.deleteAll();
+		dbclean.truncateAllTables();
 	}
 	
 	

@@ -22,6 +22,7 @@ public class ApiExceptionHandler {
     
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({
+    	LoginException.class,
         org.springframework.dao.DuplicateKeyException.class,
         org.springframework.web.HttpRequestMethodNotSupportedException.class,
         org.springframework.web.bind.MissingRequestHeaderException.class,
@@ -40,4 +41,12 @@ public class ApiExceptionHandler {
     	return new ErrorMessage(exception,request.getRequestURI());
     }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({
+            JwtException.class,
+            org.springframework.security.access.AccessDeniedException.class
+    })
+    public void unauthorized() {
+        //empty. Nothing to do
+    }
 }

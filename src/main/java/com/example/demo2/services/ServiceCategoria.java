@@ -3,6 +3,7 @@ package com.example.demo2.services;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.yaml.snakeyaml.tokens.CommentToken;
@@ -28,7 +29,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CategoryService {
+public class ServiceCategoria {
 
 	@Autowired
 	private RepositoryCategory repoCategory;

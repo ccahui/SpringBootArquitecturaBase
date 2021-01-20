@@ -33,11 +33,11 @@ import org.apache.logging.log4j.LogManager;
 import org.hibernate.Hibernate;
 
 @TestConfig
-public class ServiceCategory {
+public class CategoryServiceIT {
 	
 	@Autowired
 	private RepositoryCategory repoCategory;
-	@Autowired CategoryService service;
+	@Autowired ServiceCategoria service;
 
 	@Test
 	@Transactional
