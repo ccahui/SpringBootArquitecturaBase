@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 
 import com.example.demo2.ApiTestConfig;
+import com.example.demo2.DataBaseCleanup;
 import com.example.demo2.models.Comment;
 import com.example.demo2.models.Post;
 import com.example.demo2.repositories.RepositoryComment;
@@ -24,7 +25,8 @@ import org.junit.jupiter.api.AfterEach;
 public class ResourcePostIT {
 	
 	@Autowired
-	private RepositoryComment repoComment;
+	private DataBaseCleanup dbclean;
+	
 	@Autowired
 	private RepositoryPost repoPost;
 	
@@ -163,7 +165,7 @@ public class ResourcePostIT {
 
 	@AfterEach
 	void drowp() {
-		repoPost.deleteAll();
+		dbclean.truncateAllTables();
 	}
 	
 	

@@ -8,12 +8,15 @@ public class ErrorMessage {
 
     private String path;
 
-    public ErrorMessage(Exception exception, String path) {
-        this.exception = exception.getClass().getSimpleName();
-        this.message = exception.getMessage();
+    public ErrorMessage(String exception, String message, String path) {
+        this.exception = exception;
+        this.message = message;
         this.path = path;
     }
-
+    public ErrorMessage(Exception exception, String path) {
+    	this(exception.getClass().getSimpleName(), exception.getMessage(), path);
+    }
+    
     public String getException() {
         return exception;
     }
