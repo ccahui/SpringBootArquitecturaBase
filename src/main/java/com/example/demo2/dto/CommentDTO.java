@@ -1,4 +1,4 @@
-package com.example.demo2.rest_controller;
+package com.example.demo2.dto;
 
 public class CommentDTO {
 

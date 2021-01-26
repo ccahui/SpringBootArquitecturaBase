@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.yaml.snakeyaml.tokens.CommentToken;
 
+import com.example.demo2.dto.CommentDTO;
 import com.example.demo2.models.Comment;
 import com.example.demo2.models.Comment2;
 import com.example.demo2.models.Post;

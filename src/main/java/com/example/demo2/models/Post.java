@@ -12,15 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Post {
+public class Post extends Auditable<String>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	private List<Comment> comments;
+	private List<Comment> comments = new ArrayList();
 	
 	
 	public Post() {}
@@ -40,9 +43,6 @@ public class Post {
 		return comments;
 	}
 	public void addComment(Comment comment) {
-		if(comments == null) {
-			comments = new ArrayList();
-		}
 		comments.add(comment);
 		//this.coments.add(comment);
 	}

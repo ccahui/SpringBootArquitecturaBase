@@ -1,6 +1,7 @@
 package com.example.demo2.rest_controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo2.models.Comment;
@@ -23,23 +24,10 @@ public class PostResource {
 
 	@Autowired
 	private RepositoryPost repoPost;
-	@Autowired
-	private RepositoryComment repoComment;
-	
-	@Autowired
-	private RepositoryPost2 repoPost2;
-	@Autowired
-	private RepositoryComment2 repoComment2;
     
 	public static final String POSTS = "/posts";
 	public static final String ID = "/{id}";
 	
-	
-	public static final String STATE = "/state";
-	public static final String STATE_1 = "/state1";
-	public static final String SEARCH = "/search";
-
-
 	@GetMapping
 	public List<Post> listAll(){
 		return repoPost.findAll();
@@ -71,67 +59,4 @@ public class PostResource {
 	        }
 		
 	}
-
-    @GetMapping(value = STATE)
-    public String readState() {
-    	
-      	Post post = new Post("Title POST");  
-
-    	Comment comment = new Comment("Comment 01");
-    	Comment comment1 = new Comment("Comment 01");
-    	Comment comment2 = new Comment("Comment 01");
-  
-    	post.addComment(comment);    	
-    	post.addComment(comment1);    	
-    	post.addComment(comment2);
-    	
-    	repoPost.save(post);
-    	
-    	Post postLazy = repoPost.findById(post.getId()).get();
-    
-    	return "{\"state\":\"ok\"}"+postLazy.getComments();
- 
-    }
-    
-    @GetMapping(value=SEARCH)
-    public String readState3() {
-    	Post postR = repoPost.findById(Long.valueOf(1)).get();
-        //	postR.addComment(comment);
-        //	repoPost.save(postR);
-        return "{\"state\":\"ok\"}"+postR.getComments();
-    	
-    }
-    
-    @GetMapping(value=STATE_1)
-    public String readState2() {
-    
-
-    	Comment2 comment = new Comment2("Comment");
-    //	repoComment.save(comment);
-    	
-    	Comment2 comment1 = new Comment2("Comment");
-    //	repoComment.save(comment1);
-
-    	Comment2 comment2 = new Comment2("Comment");
-
-    	
-
-    	Post2 post = new Post2("Title POST");
-    	repoPost2.save(post);
-    	comment.setPost(post);
-    	
-    	repoComment2.save(comment);
-
-    	
-    	Comment2 commentR = repoComment2.findById(Long.valueOf(1)).get();
-    //	postR.addComment(comment);
-    //	repoPost.save(postR);
-    	
-    	return "{\"state\":\"ok\"}"+commentR.getPost();
- 
-    }
-
-
- 
-
 }

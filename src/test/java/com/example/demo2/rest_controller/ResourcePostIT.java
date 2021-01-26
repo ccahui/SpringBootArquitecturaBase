@@ -51,7 +51,7 @@ public class ResourcePostIT {
 	}
 	
 	@Test
-	void testSave() {
+	void testSaveWithAuditing() {
 		Post post = new Post("Nuevo Post");
 		Post response = this.webTestClient.post().uri(PostResource.POSTS)
 				.body(BodyInserters.fromValue(post))
@@ -61,11 +61,14 @@ public class ResourcePostIT {
 				.returnResult().getResponseBody();
 		
 		assertEquals(response.getTitle(), post.getTitle());
+		assertNotNull(response.getCreatedDate());
+		assertNotNull(response.getLastModifiedDate());
 	}
+
 	
 
 	@Test
-	void testUpdatePostPresent() {
+	void testUpdatePostPresentWithAuditing() {
 		Long id = createPostWith3Comments();
 		Post updatePost = new Post("Actualizar Titulo Nuevo");
 		
@@ -77,6 +80,7 @@ public class ResourcePostIT {
 				.returnResult().getResponseBody();
 		
 		assertEquals(response.getTitle(), updatePost.getTitle());
+		assertNotEquals(response.getCreatedDate(), response.getLastModifiedDate());
 	}
 
 	@Test
