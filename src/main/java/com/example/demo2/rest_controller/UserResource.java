@@ -28,7 +28,7 @@ public class UserResource {
 	
 	@Autowired
 	private ServiceUser userService;
-	public static final String LOGIN = "/logina";
+	public static final String LOGIN = "/login";
 	public static final String USERS = "/users";
 	public static final String ID = "/{id}";
 	
