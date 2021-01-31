@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo2.models.EnumRole;
+import com.example.demo2.models.Post;
 import com.example.demo2.models.Role;
 import com.example.demo2.models.User;
+import com.example.demo2.repositories.RepositoryPost;
 import com.example.demo2.repositories.RepositoryRole;
 import com.example.demo2.repositories.RepositoryUser;
 
@@ -20,6 +22,8 @@ public class Demo2Application implements CommandLineRunner {
 	@Autowired
 	RepositoryUser repoUser;
 	@Autowired
+	RepositoryPost repoPost;
+	@Autowired
 	PasswordEncoder encoder;
 
 	public static void main(String[] args) {
@@ -29,6 +33,14 @@ public class Demo2Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//createUserWith2Roles();
+		createPosts(100);
+	}
+	
+	private void createPosts(int post) {
+		for(int i = 0; i < post; i++) {
+			repoPost.save(new Post("Post Título "+i));
+		}
+		
 	}
 
 	private User createUserWith2Roles() {

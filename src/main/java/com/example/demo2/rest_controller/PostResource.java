@@ -1,6 +1,10 @@
 package com.example.demo2.rest_controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +17,9 @@ import com.example.demo2.repositories.RepositoryComment2;
 import com.example.demo2.repositories.RepositoryPost;
 import com.example.demo2.repositories.RepositoryPost2;
 import com.example.demo2.rest_controller.exception.NotFoundException;
+import com.example.demo2.services.PdfService;
 
+import java.io.ByteArrayInputStream;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +33,7 @@ public class PostResource {
     
 	public static final String POSTS = "/posts";
 	public static final String ID = "/{id}";
+	public static final String PDF = "/pdf";
 	
 	@GetMapping
 	public List<Post> listAll(){
@@ -59,4 +66,20 @@ public class PostResource {
 	        }
 		
 	}
+	@GetMapping(value = PDF, produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> postReport() {
+
+		List<Post> posts = repoPost.findAll();
+
+        ByteArrayInputStream bis = PdfService.postReport(posts);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
 }
