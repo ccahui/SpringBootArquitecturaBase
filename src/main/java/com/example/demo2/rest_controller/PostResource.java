@@ -2,7 +2,11 @@ package com.example.demo2.rest_controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -21,8 +25,11 @@ import com.example.demo2.services.PdfService;
 
 import java.io.ByteArrayInputStream;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(PostResource.POSTS)
@@ -36,8 +43,13 @@ public class PostResource {
 	public static final String PDF = "/pdf";
 	
 	@GetMapping
-	public List<Post> listAll(){
-		return repoPost.findAll();
+	public ResponseEntity<PageCustomize<Post>>listAll(@PageableDefault(page=0, size=5) Pageable pageable){
+		Page<Post> pagePosts= repoPost.findAll(pageable);
+		
+		PageCustomize<Post> response = new PageCustomize<Post>(pagePosts);
+		
+		
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@PostMapping
